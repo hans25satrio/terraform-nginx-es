@@ -1,0 +1,8 @@
+# Elasticsearch Name.
+cluster.name: "hans-es-cluster"
+node.name: "hans-es-single-node"
+
+# Enables CORS.
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "Authorization"

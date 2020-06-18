@@ -1,0 +1,5 @@
+certs/key.pem
+certs/cert.pem
+terraform/pem/hans-key*
+terraform/.terraform*
+terraform/terraform*
