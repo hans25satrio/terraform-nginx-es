@@ -24,7 +24,7 @@ resource "aws_instance" "hans-es" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir /home/ubuntu/docker-needs"
+      "mkdir /home/ubuntu/code"
     ]
   }
   provisioner "file" {
@@ -33,25 +33,25 @@ resource "aws_instance" "hans-es" {
   }
   provisioner "file" {
     source      = "../elasticsearch.yml"
-    destination = "/home/ubuntu/docker-needs/elasticsearch.yml"
+    destination = "/home/ubuntu/code/elasticsearch.yml"
   }
   provisioner "file" {
     source      = "../Dockerfile-elastic"
-    destination = "/home/ubuntu/docker-needs/Dockerfile-elastic"
+    destination = "/home/ubuntu/code/Dockerfile-elastic"
   }
   provisioner "file" {
     source      = "../docker-compose-elastic.yml"
-    destination = "/home/ubuntu/docker-needs/docker-compose-elastic.yml"
+    destination = "/home/ubuntu/code/docker-compose-elastic.yml"
   }
   provisioner "file" {
     source      = "../docker-entrypoint.sh"
-    destination = "/home/ubuntu/docker-needs/docker-entrypoint.sh"
+    destination = "/home/ubuntu/code/docker-entrypoint.sh"
   }
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/install-docker.sh",
       "/bin/sh -c /home/ubuntu/install-docker.sh",
-      "cd docker-needs",
+      "cd code",
       "sudo docker-compose -f docker-compose-elastic.yml up --build -d"
     ]
   }
@@ -79,7 +79,7 @@ resource "aws_instance" "hans-nginx" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir /home/ubuntu/docker-needs",
+      "mkdir /home/ubuntu/code",
       "mkdir /home/ubuntu/certs"
     ]
   }
@@ -90,15 +90,15 @@ resource "aws_instance" "hans-nginx" {
   }
   provisioner "file" {
     source      = "../nginx.conf"
-    destination = "/home/ubuntu/docker-needs"
+    destination = "/home/ubuntu/code"
   }
   provisioner "file" {
     source      = "../Dockerfile-nginx"
-    destination = "/home/ubuntu/docker-needs"
+    destination = "/home/ubuntu/code"
   }
   provisioner "file" {
     source      = "../docker-compose-nginx.yml"
-    destination = "/home/ubuntu/docker-needs"
+    destination = "/home/ubuntu/code"
   }
   provisioner "file" {
     source      = "../certs/hans.crt"
@@ -112,7 +112,7 @@ resource "aws_instance" "hans-nginx" {
     inline = [
       "chmod +x /home/ubuntu/install-docker.sh",
       "/bin/sh -c /home/ubuntu/install-docker.sh",
-      "cd docker-needs"
+      "cd code"
       "sudo docker-compose -f docker-compose-nginx.yml up"
     ]
   }
